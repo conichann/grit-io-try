@@ -1,4 +1,5 @@
-import React from "react";
+
+import React, { useState, useEffect, useCallback } from 'react';
 
 type Props = {};
 
@@ -6,25 +7,26 @@ type State = {
   count: number;
 };
 
-export class Main extends React.Component<Props, State> {
-  state: State = {
-    count: 0,
-  };
+export const Main = () => {
 
-  componentDidMount() {
-    this.setState({ count: this.state.count + 1 });
-  }
 
-  handleClick = () => {
-    this.setState({ count: this.state.count + 1 });
-  };
+    const [count, setCount] = useState(0);
+    const [count, setCount] = useState();
 
-  render() {
+    useEffect(() => {
+    setCount(count + 1);
+  }, [count]);
+    const handleClickHandler = useCallback(() => {
+    setCount(count + 1);
+  }, [count]);
+
     return (
       <div>
-        <h2>count: {this.state.count}</h2>
-        <button onClick={this.handleClick}>increment</button>
+        <h2>count: {count}</h2>
+        <button onClick={handleClickHandler}>increment</button>
       </div>
-    );
-  }
-}
+    ); 
+};
+
+
+
